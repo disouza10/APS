@@ -10,8 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_05_233540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "child", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.date "birth_date", null: false
+    t.integer "cpf"
+    t.text "notes"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id", "deleted_at"], name: "index_child_on_id_and_deleted_at", unique: true
+  end
+
+  create_table "institutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "phone"
+    t.string "email"
+    t.uuid "responsibles_id", null: false
+    t.uuid "child_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_institutions_on_child_id"
+    t.index ["id", "deleted_at"], name: "index_institutions_on_id_and_deleted_at", unique: true
+    t.index ["responsibles_id"], name: "index_institutions_on_responsibles_id"
+  end
+
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.date "birth_date", null: false
+    t.integer "cpf", null: false
+    t.text "notes"
+    t.string "secondary_email"
+    t.string "phone"
+    t.string "occupation"
+    t.string "emergency_contact"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id", "deleted_at"], name: "index_users_on_id_and_deleted_at", unique: true
+  end
+
+  add_foreign_key "institutions", "child"
+  add_foreign_key "institutions", "users", column: "responsibles_id"
 end

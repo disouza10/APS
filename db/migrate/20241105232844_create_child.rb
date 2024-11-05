@@ -1,6 +1,6 @@
-class CreateChildren < ActiveRecord::Migration[7.2]
+class CreateChild < ActiveRecord::Migration[7.2]
   def change
-    create_table :children do |t|
+    create_table :child, id: :uuid do |t|
       t.string :name, null: false
       t.date :birth_date, null: false
       t.integer :cpf
@@ -9,7 +9,7 @@ class CreateChildren < ActiveRecord::Migration[7.2]
       t.datetime :deleted_at
       t.timestamps
 
-      t.index [ :id, :deleted_at ], unique: true
+      t.index([ :id, :deleted_at ], unique: true)
     end
   end
 end
