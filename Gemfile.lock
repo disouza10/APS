@@ -105,6 +105,9 @@ GEM
     erubi (1.13.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hpricot (0.8.6)
+    html2slim-ruby3 (0.2.1)
+      hpricot
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.3)
@@ -258,6 +261,10 @@ GEM
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
+    slim-rails (3.6.3)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 6.0, != 5.0.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -307,6 +314,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  html2slim-ruby3
   importmap-rails
   jbuilder
   paranoia
@@ -316,7 +324,7 @@ DEPENDENCIES
   rails (~> 7.2.1, >= 7.2.1.2)
   rubocop-rails-omakase
   selenium-webdriver
-  slim
+  slim-rails
   sprockets-rails
   stimulus-rails
   turbo-rails

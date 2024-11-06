@@ -61,4 +61,5 @@ end
 
 
 gem 'paranoia'
-gem 'slim'
+gem 'slim-rails'
+gem 'html2slim-ruby3'
