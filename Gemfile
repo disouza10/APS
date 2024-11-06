@@ -63,3 +63,4 @@ end
 gem 'paranoia'
 gem 'slim-rails'
 gem 'html2slim-ruby3'
+gem 'devise'
