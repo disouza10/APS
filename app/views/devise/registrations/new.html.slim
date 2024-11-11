@@ -1,24 +1,47 @@
 h2
   | Sign up
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
+  = render 'devise/shared/error_messages', resource: resource
+  .field.d-flex.align-items-center
     = f.label :email
+    = f.email_field :email, autofocus: true, autocomplete: 'email'
   br
-  = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
+  .field.d-flex.align-items-center
     = f.label :password
     - if @minimum_password_length
       em
         | (
         = @minimum_password_length
         |  characters minimum)
+    = f.password_field :password, autocomplete: 'new-password'
   br
-  = f.password_field :password, autocomplete: "new-password"
-  .field
+  .field.d-flex.align-items-center
     = f.label :password_confirmation
-  br
-  = f.password_field :password_confirmation, autocomplete: "new-password"
+    = f.password_field :password_confirmation, autocomplete: 'new-password'
+  .field.d-flex.align-items-center
+    = f.label :name
+    = f.text_field :name
+  .field.d-flex.align-items-center
+    = f.label :birth_date
+    = f.date_field :birth_date
+  .field.d-flex.align-items-center
+    = f.label :cpf
+    = f.number_field :cpf
+  .field.d-flex.align-items-center
+    = f.label :notes
+    = f.text_field :notes
+  .field.d-flex.align-items-center
+    = f.label :secondary_email
+    = f.email_field :secondary_email
+  .field.d-flex.align-items-center
+    = f.label :phone
+    = f.phone_field :phone
+  .field.d-flex.align-items-center
+    = f.label :occupation
+    = f.text_field :occupation
+  .field.d-flex.align-items-center
+    = f.label :emergency_contact
+    = f.text_field :emergency_contact
   .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+    = f.submit 'Sign up'
+= render 'devise/shared/links'
