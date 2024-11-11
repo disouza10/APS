@@ -15,8 +15,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_013355) do
   enable_extension "plpgsql"
 
   create_table "child", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
-    t.date "birth_date", null: false
+    t.string "name"
+    t.date "birth_date"
     t.integer "cpf"
     t.text "notes"
     t.datetime "deleted_at"
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_013355) do
   end
 
   create_table "institutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.text "description"
     t.string "phone"
     t.string "email"
@@ -41,9 +41,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_013355) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
-    t.date "birth_date", null: false
-    t.integer "cpf", null: false
+    t.string "name"
+    t.date "birth_date"
+    t.integer "cpf"
     t.text "notes"
     t.string "secondary_email"
     t.string "phone"

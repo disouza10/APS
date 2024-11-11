@@ -1,8 +1,8 @@
 class CreateChild < ActiveRecord::Migration[7.2]
   def change
     create_table :child, id: :uuid do |t|
-      t.string :name, null: false
-      t.date :birth_date, null: false
+      t.string :name
+      t.date :birth_date
       t.integer :cpf
       t.text :notes
 

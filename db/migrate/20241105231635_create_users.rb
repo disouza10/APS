@@ -1,9 +1,9 @@
 class CreateUsers < ActiveRecord::Migration[7.2]
   def change
     create_table :users, id: :uuid do |t|
-      t.string :name, null: false
-      t.date :birth_date, null: false
-      t.integer :cpf, null: false
+      t.string :name
+      t.date :birth_date
+      t.integer :cpf
       t.text :notes
       t.string :secondary_email
       t.string :phone
