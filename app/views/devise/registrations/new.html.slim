@@ -1,47 +1,70 @@
-h2
-  | Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render 'devise/shared/error_messages', resource: resource
-  .field.d-flex.align-items-center
-    = f.label :email
-    = f.email_field :email, autofocus: true, autocomplete: 'email'
-  br
-  .field.d-flex.align-items-center
-    = f.label :password
-    - if @minimum_password_length
-      em
-        | (
-        = @minimum_password_length
-        |  characters minimum)
-    = f.password_field :password, autocomplete: 'new-password'
-  br
-  .field.d-flex.align-items-center
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation, autocomplete: 'new-password'
-  .field.d-flex.align-items-center
-    = f.label :name
-    = f.text_field :name
-  .field.d-flex.align-items-center
-    = f.label :birth_date
-    = f.date_field :birth_date
-  .field.d-flex.align-items-center
-    = f.label :cpf
-    = f.number_field :cpf
-  .field.d-flex.align-items-center
-    = f.label :notes
-    = f.text_field :notes
-  .field.d-flex.align-items-center
-    = f.label :secondary_email
-    = f.email_field :secondary_email
-  .field.d-flex.align-items-center
-    = f.label :phone
-    = f.phone_field :phone
-  .field.d-flex.align-items-center
-    = f.label :occupation
-    = f.text_field :occupation
-  .field.d-flex.align-items-center
-    = f.label :emergency_contact
-    = f.text_field :emergency_contact
-  .actions
-    = f.submit 'Sign up'
-= render 'devise/shared/links'
+.sign-up-form.py-4
+  .form-header.text-center.mb-4
+    h2
+      | Sign up
+  .form-body
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render 'devise/shared/error_messages', resource: resource
+      .row
+        .col-md-4
+          .form-group
+            = f.label :email
+            = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'ml-1'
+        .col-md-4
+          .field
+            = f.label :password
+            - if @minimum_password_length
+              em
+                | (
+                = @minimum_password_length
+                |  characters minimum)
+            = f.password_field :password, autocomplete: 'new-password'
+        .col-md-4
+          .field
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, autocomplete: 'new-password'
+
+      .row
+        .col-md-4
+          .field
+            = f.label :name
+            = f.text_field :name
+        .col-md-4
+          .field
+            = f.label :birth_date
+            = f.date_field :birth_date
+        .col-md-4
+          .field
+            = f.label :cpf
+            = f.number_field :cpf
+
+      .row
+        .col-md-4
+          .field
+            = f.label :secondary_email
+            = f.email_field :secondary_email
+        .col-md-4
+          .field
+            = f.label :phone
+            = f.phone_field :phone
+        .col-md-4
+          .field
+            = f.label :occupation
+            = f.text_field :occupation
+
+      .row
+        .col-md-6
+          .field
+            = f.label :notes
+            = f.text_field :notes
+        .col-md-6
+          .field
+            = f.label :emergency_contact
+            = f.text_field :emergency_contact
+
+      .row.mt-4
+        .col-md-9
+        .col-md-3
+          .actions
+            = f.submit 'Sign up'
+            = render 'devise/shared/links'
