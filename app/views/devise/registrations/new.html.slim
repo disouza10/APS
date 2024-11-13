@@ -10,59 +10,59 @@
 
       .row
         .col-md-4.mb-3
-          = f.label :name, 'Full Name', class: 'form-label'
-          = f.text_field :name, placeholder: 'enter...', class: 'form-control', required: true
+          = f.label :name, 'Nome Completo *', class: 'form-label'
+          = f.text_field :name, class: 'form-control', required: true
         .col-md-4.mb-3
-          = f.label :cpf, 'CPF', class: 'form-label'
+          = f.label :cpf, 'CPF *', class: 'form-label'
           = f.number_field :cpf, placeholder: 'XXX.XXX.XXX-XX', class: 'form-control', required: true
         .col-md-4.mb-3
-          = f.label :birth_date, 'Date of Birth', class: 'form-label'
-          = f.date_field :birth_date, placeholder: 'MM / DD / YY', class: 'form-control', required: true
+          = f.label :birth_date, 'Data de Nascimento *', class: 'form-label'
+          = f.date_field :birth_date, placeholder: 'DD/MM/YY', class: 'form-control', required: true
 
       .row
         .col-md-6.mb-3
-          = f.label :email, 'Email', class: 'form-label'
+          = f.label :email, 'Email *', class: 'form-label'
           = f.email_field :email, placeholder: 'example@gmail.com', autofocus: true, autocomplete: 'email', class: 'form-control', required: true
         .col-md-6.mb-3
-          = f.label :secondary_email, 'Secondary Email', class: 'form-label'
+          = f.label :secondary_email, 'Email Secundário (opcional)', class: 'form-label'
           = f.email_field :secondary_email, placeholder: 'example@gmail.com', autofocus: true, autocomplete: 'email', class: 'form-control'
 
       .row
         .col-md-6.mb-3
-          = f.label :phone, 'Phone Number', class: 'form-label'
+          = f.label :phone, 'Telefone *', class: 'form-label'
           = f.telephone_field :phone, placeholder: '+45 1344-343', class: 'form-control', required: true
         .col-md-6.mb-3
-          = f.label :phone, 'Emergency Contact', class: 'form-label'
-          = f.telephone_field :phone, placeholder: '+45 1344-343', class: 'form-control', required: true
+          = f.label :emergency_contact, 'Contato de Emergência *', class: 'form-label'
+          = f.telephone_field :emergency_contact, placeholder: '+45 1344-343', class: 'form-control', required: true
 
       .row
         .col-md-6.mb-3
-          = f.label :occupation, 'Occupation', class: 'form-label'
-          = f.text_field :occupation, placeholder: 'enter...', class: 'form-control', required: true
+          = f.label :occupation, 'Profissão *', class: 'form-label'
+          = f.text_field :occupation, class: 'form-control', required: true
         .col-md-6.mb-3
-          = f.label :notes, 'Notes', class: 'form-label'
-          = f.text_field :notes, placeholder: 'enter...', class: 'form-control', required: true
+          / TODO: adicionar tooltip
+          / Nesse campo, você pode detalhar alguma intolerância, alergia ou questão específica de saúde/alimentação. Se for o caso, sinta-se a vontade para compartilhar conosco.
+          / Obs: essa informação poderá ser compartilhada com o líder da sua equipe.
+          = f.label :notes, 'Informações Relevantes', class: 'form-label'
+          = f.text_field :notes, class: 'form-control'
 
       .row
         .col-md-6.mb-3
-          = f.label :password, 'Password', class: 'form-label'
+          = f.label :password, 'Senha', class: 'form-label'
           - if @minimum_password_length
-            em
-              | (
-              = @minimum_password_length
-              |  characters min)
-          = f.password_field :password, placeholder: 'enter...', autocomplete: 'new-password', class: 'form-control', required: true
+            em = " (#{@minimum_password_length} caracteres no mínimo)"
+          = f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true
         .col-md-6.mb-3
-          = f.label :password_confirmation, 'Confirm Password', class: 'form-label'
-          = f.password_field :password_confirmation, placeholder: 'enter...', autocomplete: 'new-password', class: 'form-control', required: true
+          = f.label :password_confirmation, 'Confirmar Senha', class: 'form-label'
+          = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', required: true
 
       .row.mt-4
         .col-md-6.text-start
-          = link_to 'Cancel', root_path, class: 'btn btn-outline-secondary w-100'
+          = link_to 'Cancelar', root_path, class: 'btn btn-outline-secondary w-100'
         .col-md-6.text-end
-          = f.submit 'Confirm', class: 'btn btn-primary w-100'
+          = f.submit 'Confirmar', class: 'btn btn-primary w-100'
 
       .text-center.mt-3
         p.text-muted
-          | Already have an account?
+          span = 'Já possui conta?'
           = link_to 'Login', new_session_path(resource_name), class: 'text-primary'
