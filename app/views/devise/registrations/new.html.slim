@@ -1,70 +1,68 @@
-.sign-up-form.py-4
+.sign-up-form.container.py-4
   .form-header.text-center.mb-4
-    h2
-      | Sign up
+    / = image_tag 'logo.png', alt: 'Logo', class: 'mb-3' # Substitua 'logo.png' pelo caminho do seu logo
+    h2 Sign up
+    p.text-muted Enter your details below to create your account and get started.
+
   .form-body
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation", novalidate: true }) do |f|
       = render 'devise/shared/error_messages', resource: resource
-      .row
-        .col-md-4
-          .form-group
-            = f.label :email
-            = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'ml-1'
-        .col-md-4
-          .field
-            = f.label :password
-            - if @minimum_password_length
-              em
-                | (
-                = @minimum_password_length
-                |  characters minimum)
-            = f.password_field :password, autocomplete: 'new-password'
-        .col-md-4
-          .field
-            = f.label :password_confirmation
-            = f.password_field :password_confirmation, autocomplete: 'new-password'
 
       .row
-        .col-md-4
-          .field
-            = f.label :name
-            = f.text_field :name
-        .col-md-4
-          .field
-            = f.label :birth_date
-            = f.date_field :birth_date
-        .col-md-4
-          .field
-            = f.label :cpf
-            = f.number_field :cpf
+        .col-md-4.mb-3
+          = f.label :name, 'Full Name', class: 'form-label'
+          = f.text_field :name, placeholder: 'enter...', class: 'form-control', required: true
+        .col-md-4.mb-3
+          = f.label :cpf, 'CPF', class: 'form-label'
+          = f.number_field :cpf, placeholder: 'XXX.XXX.XXX-XX', class: 'form-control', required: true
+        .col-md-4.mb-3
+          = f.label :birth_date, 'Date of Birth', class: 'form-label'
+          = f.date_field :birth_date, placeholder: 'MM / DD / YY', class: 'form-control', required: true
 
       .row
-        .col-md-4
-          .field
-            = f.label :secondary_email
-            = f.email_field :secondary_email
-        .col-md-4
-          .field
-            = f.label :phone
-            = f.phone_field :phone
-        .col-md-4
-          .field
-            = f.label :occupation
-            = f.text_field :occupation
+        .col-md-6.mb-3
+          = f.label :email, 'Email', class: 'form-label'
+          = f.email_field :email, placeholder: 'example@gmail.com', autofocus: true, autocomplete: 'email', class: 'form-control', required: true
+        .col-md-6.mb-3
+          = f.label :secondary_email, 'Secondary Email', class: 'form-label'
+          = f.email_field :secondary_email, placeholder: 'example@gmail.com', autofocus: true, autocomplete: 'email', class: 'form-control'
 
       .row
-        .col-md-6
-          .field
-            = f.label :notes
-            = f.text_field :notes
-        .col-md-6
-          .field
-            = f.label :emergency_contact
-            = f.text_field :emergency_contact
+        .col-md-6.mb-3
+          = f.label :phone, 'Phone Number', class: 'form-label'
+          = f.telephone_field :phone, placeholder: '+45 1344-343', class: 'form-control', required: true
+        .col-md-6.mb-3
+          = f.label :phone, 'Emergency Contact', class: 'form-label'
+          = f.telephone_field :phone, placeholder: '+45 1344-343', class: 'form-control', required: true
+
+      .row
+        .col-md-6.mb-3
+          = f.label :occupation, 'Occupation', class: 'form-label'
+          = f.text_field :occupation, placeholder: 'enter...', class: 'form-control', required: true
+        .col-md-6.mb-3
+          = f.label :notes, 'Notes', class: 'form-label'
+          = f.text_field :notes, placeholder: 'enter...', class: 'form-control', required: true
+
+      .row
+        .col-md-6.mb-3
+          = f.label :password, 'Password', class: 'form-label'
+          - if @minimum_password_length
+            em
+              | (
+              = @minimum_password_length
+              |  characters min)
+          = f.password_field :password, placeholder: 'enter...', autocomplete: 'new-password', class: 'form-control', required: true
+        .col-md-6.mb-3
+          = f.label :password_confirmation, 'Confirm Password', class: 'form-label'
+          = f.password_field :password_confirmation, placeholder: 'enter...', autocomplete: 'new-password', class: 'form-control', required: true
 
       .row.mt-4
-        .col-md-9
-        .col-md-3
-          .actions
-            = f.submit 'Sign up'
-            = render 'devise/shared/links'
+        .col-md-6.text-start
+          = link_to 'Cancel', root_path, class: 'btn btn-outline-secondary w-100'
+        .col-md-6.text-end
+          = f.submit 'Confirm', class: 'btn btn-primary w-100'
+
+      .text-center.mt-3
+        p.text-muted
+          | Already have an account?
+          = link_to 'Login', new_session_path(resource_name), class: 'text-primary'
