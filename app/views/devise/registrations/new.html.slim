@@ -32,8 +32,11 @@
           = f.label :phone, 'Telefone *', class: 'form-label'
           = f.telephone_field :phone, placeholder: '+45 1344-343', class: 'form-control', required: true
         .col-md-6.mb-3
-          = f.label :emergency_contact, 'Contato de Emergência *', class: 'form-label'
-          = f.telephone_field :emergency_contact, placeholder: '+45 1344-343', class: 'form-control', required: true
+          = f.label :emergency_contact_phone, 'Contato de Emergência *', class: 'form-label'
+          = f.telephone_field :emergency_contact_phone, placeholder: '+45 1344-343', class: 'form-control', required: true
+        .col-md-6.mb-3
+          = f.label :emergency_contact_name, 'Contato de Emergência *', class: 'form-label'
+          = f.telephone_field :emergency_contact_name, placeholder: '+45 1344-343', class: 'form-control', required: true
 
       .row
         .col-md-6.mb-3
