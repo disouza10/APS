@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_21_001032) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_22_011753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,14 +42,30 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_21_001032) do
     t.text "description"
     t.string "phone"
     t.string "email"
-    t.uuid "responsibles_id", null: false
-    t.uuid "child_id", null: false
+    t.uuid "responsibles_id"
+    t.uuid "child_id"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["child_id"], name: "index_institutions_on_child_id"
     t.index ["id", "deleted_at"], name: "index_institutions_on_id_and_deleted_at", unique: true
     t.index ["responsibles_id"], name: "index_institutions_on_responsibles_id"
+  end
+
+  create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "status", default: "active"
+    t.uuid "institution_id"
+    t.uuid "volunteers_id"
+    t.uuid "children_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["children_id"], name: "index_teams_on_children_id"
+    t.index ["id", "deleted_at"], name: "index_teams_on_id_and_deleted_at", unique: true
+    t.index ["institution_id"], name: "index_teams_on_institution_id"
+    t.index ["volunteers_id"], name: "index_teams_on_volunteers_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -82,4 +98,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_21_001032) do
 
   add_foreign_key "institutions", "child"
   add_foreign_key "institutions", "users", column: "responsibles_id"
+  add_foreign_key "teams", "child", column: "children_id"
+  add_foreign_key "teams", "institutions"
+  add_foreign_key "teams", "users", column: "volunteers_id"
 end
