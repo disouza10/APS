@@ -8,7 +8,7 @@
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation", novalidate: true }) do |f|
       = render 'devise/shared/error_messages', resource: resource
 
-      .row
+      / .row
         .col-md-4.mb-3
           = f.label :name, 'Nome Completo *', class: 'form-label'
           = f.text_field :name, class: 'form-control', required: true
@@ -20,14 +20,14 @@
           = f.date_field :birth_date, placeholder: 'DD/MM/YY', class: 'form-control', required: true
 
       .row
-        .col-md-6.mb-3
+        .col-md-12.mb-3
           = f.label :email, 'Email *', class: 'form-label'
           = f.email_field :email, placeholder: 'example@gmail.com', autofocus: true, autocomplete: 'email', class: 'form-control', required: true
-        .col-md-6.mb-3
+        / .col-md-6.mb-3
           = f.label :secondary_email, 'Email Secundário (opcional)', class: 'form-label'
           = f.email_field :secondary_email, placeholder: 'example@gmail.com', autofocus: true, autocomplete: 'email', class: 'form-control'
 
-      .row
+      / .row
         .col-md-6.mb-3
           = f.label :phone, 'Telefone *', class: 'form-label'
           = f.telephone_field :phone, placeholder: '+45 1344-343', class: 'form-control', required: true
@@ -38,7 +38,7 @@
           = f.label :emergency_contact_name, 'Contato de Emergência *', class: 'form-label'
           = f.telephone_field :emergency_contact_name, placeholder: '+45 1344-343', class: 'form-control', required: true
 
-      .row
+      / .row
         .col-md-6.mb-3
           = f.label :occupation, 'Profissão *', class: 'form-label'
           = f.text_field :occupation, class: 'form-control', required: true
