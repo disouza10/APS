@@ -14,5 +14,11 @@ fi
 # Default to port 3000 if not specified
 export PORT="${PORT:-3000}"
 
+SOCK_FILE=".overmind.sock"
+
+if [ -e "$SOCK_FILE" ]; then
+  rm "$SOCK_FILE"
+fi
+
 # exec foreman start -f Procfile.dev --env /dev/null "$@"
 overmind start -f Procfile.dev

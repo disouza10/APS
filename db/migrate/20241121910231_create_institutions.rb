@@ -6,9 +6,6 @@ class CreateInstitutions < ActiveRecord::Migration[7.2]
       t.string :phone
       t.string :email
 
-      t.references :responsibles, foreign_key: { to_table: :users }, type: :uuid, index: true
-      t.references :child, foreign_key: { to_table: :child }, type: :uuid, index: true
-
       t.datetime :deleted_at
       t.timestamps
 

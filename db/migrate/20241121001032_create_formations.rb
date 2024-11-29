@@ -10,6 +10,8 @@ class CreateFormations < ActiveRecord::Migration[7.2]
       t.timestamps
       t.datetime :deleted_at
 
+      t.references :team, foreign_key: { to_table: :teams }, type: :uuid, index: true
+
       t.index([ :id, :deleted_at ], unique: true)
     end
   end

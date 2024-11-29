@@ -3,8 +3,8 @@ class Team < ApplicationRecord
 
   belongs_to :institution
 
-  has_many :volunteers, class_name: "User", foreign_key: "volunteers_id"
-  has_many :children, class_name: "Child", foreign_key: "children_id"
+  has_many :volunteers
+  has_many :children, class_name: "Child"
 
   enum status: { active: "active", inactive: "inactive" }, _default: "active", _suffix: true
 end

@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_22_011753) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_29_010649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "child", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "children", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.date "birth_date"
     t.integer "cpf"
@@ -22,7 +22,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_22_011753) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["id", "deleted_at"], name: "index_child_on_id_and_deleted_at", unique: true
+    t.uuid "team_id"
+    t.uuid "institution_id"
+    t.index ["id", "deleted_at"], name: "index_children_on_id_and_deleted_at", unique: true
+    t.index ["institution_id"], name: "index_children_on_institution_id"
+    t.index ["team_id"], name: "index_children_on_team_id"
   end
 
   create_table "formations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -34,7 +38,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_22_011753) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.uuid "team_id"
     t.index ["id", "deleted_at"], name: "index_formations_on_id_and_deleted_at", unique: true
+    t.index ["team_id"], name: "index_formations_on_team_id"
   end
 
   create_table "institutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -42,44 +48,25 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_22_011753) do
     t.text "description"
     t.string "phone"
     t.string "email"
-    t.uuid "responsibles_id"
-    t.uuid "child_id"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["child_id"], name: "index_institutions_on_child_id"
     t.index ["id", "deleted_at"], name: "index_institutions_on_id_and_deleted_at", unique: true
-    t.index ["responsibles_id"], name: "index_institutions_on_responsibles_id"
   end
 
   create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.string "status", default: "active"
-    t.uuid "institution_id"
-    t.uuid "volunteers_id"
-    t.uuid "children_id"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["children_id"], name: "index_teams_on_children_id"
+    t.uuid "institution_id"
     t.index ["id", "deleted_at"], name: "index_teams_on_id_and_deleted_at", unique: true
     t.index ["institution_id"], name: "index_teams_on_institution_id"
-    t.index ["volunteers_id"], name: "index_teams_on_volunteers_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.date "birth_date"
-    t.integer "cpf"
-    t.text "notes"
-    t.string "secondary_email"
-    t.string "phone"
-    t.string "occupation"
-    t.string "emergency_contact_phone"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -90,15 +77,28 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_22_011753) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.text "emergency_contact_name"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["id", "deleted_at"], name: "index_users_on_id_and_deleted_at", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "institutions", "child"
-  add_foreign_key "institutions", "users", column: "responsibles_id"
-  add_foreign_key "teams", "child", column: "children_id"
+  create_table "volunteers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.date "birth_date"
+    t.integer "cpf"
+    t.text "notes"
+    t.string "secondary_email"
+    t.string "phone"
+    t.string "occupation"
+    t.string "emergency_contact_phone"
+    t.string "emergency_contact_name"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id", "deleted_at"], name: "index_volunteers_on_id_and_deleted_at", unique: true
+  end
+
+  add_foreign_key "children", "institutions"
+  add_foreign_key "children", "teams"
+  add_foreign_key "formations", "teams"
   add_foreign_key "teams", "institutions"
-  add_foreign_key "teams", "users", column: "volunteers_id"
 end
