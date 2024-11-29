@@ -2,9 +2,9 @@ class CreateFormations < ActiveRecord::Migration[7.2]
   def change
     create_table :formations, id: :uuid do |t|
       t.datetime :answered_at
-      t.string :email
       t.string :name
-      t.string :team
+      t.string :volunteer_name
+      t.string :volunteer_email
       t.string :feedback
 
       t.timestamps

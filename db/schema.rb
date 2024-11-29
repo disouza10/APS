@@ -31,9 +31,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_010649) do
 
   create_table "formations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "answered_at"
-    t.string "email"
     t.string "name"
-    t.string "team"
+    t.string "volunteer_name"
+    t.string "volunteer_email"
     t.string "feedback"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

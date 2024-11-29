@@ -9,14 +9,14 @@ class ReportsController < ApplicationController
 
     begin
       if uploaded_file.present?
-        CSV.foreach(uploaded_file.path, headers: true, col_sep: ";") do |row|
-          answered_at = DateTime.strptime(row["﻿Carimbo de data/hora"], "%d/%m/%Y %H:%M")
+        CSV.foreach(uploaded_file.path, headers: true, col_sep: ",") do |row|
+          answered_at = DateTime.strptime(row["Carimbo de data/hora"], "%d/%m/%Y %H:%M")
           email = row[1]
-          name = row["Nome"]
-          team = row["Equipe"]
+          volunteer_name = row["Nome"]
+          team = Team.find_by("LOWER(name) = ?", row["Equipe"].downcase)
           feedback = row["Espaço para feedback opcional sobre a formação:"]
 
-          formation = Formation.new(answered_at: answered_at, email: email, name: name, team: team, feedback: feedback)
+          formation = Formation.new(name: params[:name], answered_at: answered_at, volunteer_email: email, volunteer_name: volunteer_name, team: team, feedback: feedback)
           formation.save!
         end
         redirect_to reports_path, notice: "Arquivo CSV processado com sucesso!"
@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
         redirect_to reports_path, alert: "Nenhum arquivo foi selecionado."
       end
     rescue => e
-      redirect_to new_upload_path, alert: "Erro ao processar o arquivo: #{e.message}"
+      redirect_to reports_path, alert: "Erro ao processar o arquivo: #{e.message}"
     end
   end
 end
