@@ -1,10 +1,10 @@
 require "csv"
 
-class ReportsController < ApplicationController
-  def index
+class Imports::FormationsController < ApplicationController
+  def new
   end
 
-  def import_report
+  def create
     uploaded_file = params[:file]
 
     begin
@@ -19,12 +19,12 @@ class ReportsController < ApplicationController
           formation = Formation.new(name: params[:name], answered_at: answered_at, volunteer_email: email, volunteer_name: volunteer_name, team: team, feedback: feedback)
           formation.save!
         end
-        redirect_to reports_path, notice: "Arquivo CSV processado com sucesso!"
+        redirect_to imports_path, notice: "Arquivo CSV processado com sucesso!"
       else
-        redirect_to reports_path, alert: "Nenhum arquivo foi selecionado."
+        redirect_to imports_path, alert: "Nenhum arquivo foi selecionado."
       end
     rescue => e
-      redirect_to reports_path, alert: "Erro ao processar o arquivo: #{e.message}"
+      redirect_to imports_path, alert: "Erro ao processar o arquivo: #{e.message}"
     end
   end
 end
