@@ -1,0 +1,10 @@
+.container.mt-5
+  .row.justify-content-center
+    .col-md-6
+      h2.text-center.mb-4 Importar Voluntários
+      = form_with url: volunteers_path, method: :post, local: true, html: { multipart: true } do |f|
+        .form-group.mb-3
+          = f.label :file, "Selecione um arquivo CSV", class: "form-label"
+          = f.file_field :file, class: "form-control"
+        .d-grid
+          = f.submit "Upload", class: "btn btn-primary"
