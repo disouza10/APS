@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_29_010649) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_30_233748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_010649) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "institution_id"
+    t.string "sanitized_name"
     t.index ["id", "deleted_at"], name: "index_teams_on_id_and_deleted_at", unique: true
     t.index ["institution_id"], name: "index_teams_on_institution_id"
   end
@@ -86,9 +87,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_010649) do
   end
 
   create_table "volunteers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
+    t.string "full_name"
     t.date "birth_date"
-    t.integer "cpf"
     t.text "notes"
     t.string "secondary_email"
     t.string "phone"
@@ -98,11 +98,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_010649) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.string "coordination_notes"
+    t.string "email"
+    t.uuid "current_team_id"
+    t.uuid "original_team_id"
+    t.index ["current_team_id"], name: "index_volunteers_on_current_team_id"
     t.index ["id", "deleted_at"], name: "index_volunteers_on_id_and_deleted_at", unique: true
+    t.index ["original_team_id"], name: "index_volunteers_on_original_team_id"
   end
 
   add_foreign_key "children", "institutions"
   add_foreign_key "children", "teams"
   add_foreign_key "formations", "teams"
   add_foreign_key "teams", "institutions"
+  add_foreign_key "volunteers", "teams", column: "current_team_id"
+  add_foreign_key "volunteers", "teams", column: "original_team_id"
 end
