@@ -1,0 +1,23 @@
+.container
+  h1.my-4.text-center = 'Voluntários'
+
+  table.table.table-bordered.table-hover
+    thead
+      tr
+        th Nome
+        th Email
+        th Equipe
+        th Ações
+    tbody
+      - @volunteers.each do |volunteer|
+        tr
+          td = volunteer.full_name
+          td = volunteer.email
+          td = volunteer.current_team&.name.presence || 'Inativo'
+          td
+            = link_to volunteer_path(volunteer), class: "d-inline me-2" do
+              i.bi.bi-eye-fill
+            = link_to edit_volunteer_path(volunteer), class: "d-inline me-2" do
+              i.bi.bi-pencil-fill
+            = link_to volunteer_path(volunteer), method: :delete, class: "d-inline" do
+              i.bi.bi-trash-fill

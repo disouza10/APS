@@ -6,11 +6,13 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  resources :volunteers, only: %i[index show edit destroy]
+
   resources :imports, only: %i[index] do
     collection do
-      resources :formations, only: %i[show new create], module: "imports"
-      resources :children, only: %i[show new create], module: "imports"
-      resources :volunteers, only: %i[show new create], module: "imports"
+      resources :import_formations, only: %i[show new create]
+      resources :import_children, only: %i[show new create]
+      resources :import_volunteers, only: %i[show new create]
     end
   end
 
