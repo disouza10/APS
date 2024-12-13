@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  resources :volunteers, only: %i[index show edit destroy]
+  resources :volunteers
 
   resources :imports, only: %i[index] do
     collection do

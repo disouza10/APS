@@ -1,0 +1,59 @@
+.container.card.p-4
+  h1.title.my-3 Detalhes Voluntário
+
+  .row
+    .col-md-6
+      p
+        strong = 'Nome Completo: '
+        = @volunteer.full_name
+      p
+        strong = 'Data de nascimento: '
+        = @volunteer.birth_date
+      p
+        strong = 'Email: '
+        = @volunteer.email
+      p
+        strong = 'Email Secundário: '
+        = @volunteer.secondary_email
+
+    .col-md-6
+      p
+        strong = 'Telefone: '
+        = @volunteer.phone
+      p
+        strong = 'Profissão: '
+        = @volunteer.occupation
+      p
+        strong = 'Contato de Emergência - Nome: '
+        = @volunteer.emergency_contact_name
+      p
+        strong = 'Contato de Emergência - Nome: '
+        = @volunteer.emergency_contact_phone
+
+  .row
+    .col-md-6
+      p
+        strong = 'Address: '
+        = @volunteer.address
+      p
+        strong = 'Notes: '
+        = @volunteer.notes
+      p
+        strong = 'Coordination Notes: '
+        = @volunteer.coordination_notes
+      p
+        strong = 'Current Team: '
+        = @volunteer.current_team&.name
+
+    .col-md-6
+      p
+        strong = 'Original Team: '
+        = @volunteer.original_team&.name
+      p
+        strong = 'Created At: '
+        = @volunteer.created_at
+      p
+        strong = 'Updated At: '
+        = @volunteer.updated_at
+
+  = link_to "Voltar", volunteers_path, class: "btn btn-secondary"
