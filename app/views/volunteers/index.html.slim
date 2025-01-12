@@ -23,5 +23,5 @@
               i.bi.bi-eye-fill
             = link_to edit_volunteer_path(volunteer), class: "d-inline me-2" do
               i.bi.bi-pencil-fill
-            = link_to volunteer_path(volunteer), method: :delete, class: "d-inline" do
+            = link_to volunteer_path(volunteer), data: { turbo_method: :delete }, class: "d-inline" do
               i.bi.bi-trash-fill
