@@ -1,6 +1,10 @@
 .container
   h1.my-4.text-center = 'Voluntários'
 
+  .row
+    .col-md-12.d-flex.justify-content-end
+      = link_to 'Novo Voluntário', new_volunteer_path, class: "btn btn-primary mb-4"
+
   table.table.table-bordered.table-hover
     thead
       tr

@@ -8,6 +8,10 @@ class VolunteersController < ApplicationController
   def show
   end
 
+  def new
+    @volunteer = Volunteer.new
+  end
+
   def create
     @volunteer = Volunteer.new(volunteer_params)
 
