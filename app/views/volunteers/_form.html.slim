@@ -2,6 +2,7 @@ ruby:
   volunteer = local_assigns.fetch(:volunteer, Volunteer.new)
   action = local_assigns.fetch(:action)
   action_label = action == 'edit' ? 'Editar' : 'Criar'
+  save_action = action == 'edit' ? 'Atualizar' : 'Criar'
 
 .form.container.py-4
   .form-header.text-center.mb-4
@@ -55,22 +56,22 @@ ruby:
           = f.label :address, 'Endereço', class: 'form-label'
           = f.text_field :address, class: "form-control"
         .col-md-6
+          = f.label :coordination_notes, "Observações da Coordenação", class: 'form-label'
+          = f.text_area :coordination_notes, class: "form-control"
+
+      .row.mt-3
+        .col-md-12
           = f.label :notes, 'Informações relevantes: Nesse campo, você pode detalhar alguma intolerância, alergia ou questão específica de saúde/alimentação. Se for o caso, sinta-se a vontade para compartilhar conosco. Obs: essa informação poderá ser compartilhada com o líder da sua equipe.', class: 'form-label'
           = f.text_area :notes, class: "form-control"
 
-      .row
+      .row.mt-3
         .col-md-6
-          = f.label :coordination_notes, "Observações da Coordenação", class: 'form-label'
-          = f.text_area :coordination_notes, class: "form-control"
-        .col-md-6
-          = f.label :current_team_id, "Equipe Atual", class: 'form-label'
+          = f.label :current_team_id, "Equipe Atual", class: 'form-label me-2'
           = f.collection_select :current_team_id, Team.all, :id, :name, class: "form-control"
-
-      .row
         .col-md-6
-          = f.label :original_team_id, "Equipe Original", class: 'form-label'
+          = f.label :original_team_id, "Equipe Original", class: 'form-label me-2'
           = f.collection_select :original_team_id, Team.all, :id, :name, class: "form-control"
 
-      .mt-3
-        = f.submit action_label, class: "btn btn-primary"
-        = link_to "Voltar", volunteers_path, class: "btn btn-secondary"
+      .mt-3.d-flex.justify-content-end
+        = link_to "Voltar", volunteers_path, class: "btn btn-secondary me-2"
+        = f.submit save_action, class: "btn btn-primary"

@@ -1,59 +1,77 @@
 .container.card.p-4
-  h1.title.my-3 Detalhes Voluntário
-
+  h1.title.mb-3 Detalhes Voluntário
   .row
     .col-md-6
       p
         strong = 'Nome Completo: '
         = @volunteer.full_name
+    .col-md-6
       p
         strong = 'Data de nascimento: '
-        = @volunteer.birth_date
+        = @volunteer.birth_date.strftime("%d/%m/%Y")
+  .row
+    .col-md-6
       p
         strong = 'Email: '
         = @volunteer.email
+    .col-md-6
       p
         strong = 'Email Secundário: '
         = @volunteer.secondary_email
 
+  .row
     .col-md-6
       p
         strong = 'Telefone: '
         = @volunteer.phone
+    .col-md-6
       p
         strong = 'Profissão: '
         = @volunteer.occupation
+  .row
+    .col-md-6
       p
         strong = 'Contato de Emergência - Nome: '
         = @volunteer.emergency_contact_name
+    .col-md-6
       p
-        strong = 'Contato de Emergência - Nome: '
+        strong = 'Contato de Emergência - Telefone: '
         = @volunteer.emergency_contact_phone
 
   .row
     .col-md-6
       p
-        strong = 'Address: '
+        strong = 'Endereço: '
         = @volunteer.address
       p
-        strong = 'Notes: '
-        = @volunteer.notes
-      p
-        strong = 'Coordination Notes: '
+        strong = 'Observações da coordenação: '
         = @volunteer.coordination_notes
+  .row
+    .col-md-12
       p
-        strong = 'Current Team: '
-        = @volunteer.current_team&.name
+        strong = "Informações relevantes:"
+        = @volunteer.notes
 
+  .row
     .col-md-6
       p
-        strong = 'Original Team: '
+        strong = 'Equipe Atual: '
+        = @volunteer.current_team&.name
+    .col-md-6
+      p
+        strong = 'Equipe Original: '
         = @volunteer.original_team&.name
-      p
-        strong = 'Created At: '
-        = @volunteer.created_at
-      p
-        strong = 'Updated At: '
-        = @volunteer.updated_at
 
-  = link_to "Voltar", volunteers_path, class: "btn btn-secondary"
+  .row
+    .col-md-6
+      p
+        strong = 'Criado em: '
+        = @volunteer.created_at.strftime("%d/%m/%Y às %H:%M")
+    .col-md-6
+      p
+        strong = 'Atualizado em: '
+        = @volunteer.updated_at.strftime("%d/%m/%Y às %H:%M")
+
+  .row
+    .mt-3.d-flex.justify-content-end
+      = link_to "Voltar", volunteers_path, class: "btn btn-secondary"
