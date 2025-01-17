@@ -1,6 +1,6 @@
 require "csv"
 
-class Imports::ChildrenController < ApplicationController
+class Imports::ImportChildrenController < ApplicationController
   def new
   end
 

@@ -1,6 +1,6 @@
 require "csv"
 
-class Imports::FormationsController < ApplicationController
+class Imports::ImportFormationsController < ApplicationController
   def new
   end
 

@@ -2,7 +2,7 @@
   .row.justify-content-center
     .col-md-6
       h2.text-center.mb-4 Importar Formação
-      = form_with url: formations_path, method: :post, local: true, html: { multipart: true } do |f|
+      = form_with url: import_formations_path, method: :post, local: true, html: { multipart: true } do |f|
         .form-group.mb-3
           = f.label 'Nome da Formação', class: 'form-label'
           = f.text_field :name, class: 'form-control'

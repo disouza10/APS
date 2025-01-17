@@ -12,9 +12,9 @@ Rails.application.routes.draw do
 
   resources :imports, only: %i[index] do
     collection do
-      resources :import_formations, only: %i[show new create]
-      resources :import_children, only: %i[show new create]
-      resources :import_volunteers, only: %i[show new create]
+      resources :import_formations, controller: "imports/import_formations", only: %i[show new create]
+      resources :import_children, controller: "imports/import_children", only: %i[show new create]
+      resources :import_volunteers, controller: "imports/import_volunteers", only: %i[show new create]
     end
   end
 

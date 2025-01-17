@@ -6,6 +6,6 @@ class Institution < ApplicationRecord
   has_many :teams
 
   def volunteers_count
-    self.teams.map { |team| team.current_volunteers.count }.sum
+    self.teams.map { |team| team.volunteers.count }.sum
   end
 end
