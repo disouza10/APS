@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   }
 
   resources :volunteers
+  resources :institutions
 
   resources :imports, only: %i[index] do
     collection do

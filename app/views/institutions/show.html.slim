@@ -1,0 +1,35 @@
+.container.card.mt-4.p-4
+  h1.title.text-center.mb-4 Detalhes Instituição
+
+  .row
+    .col-md-6
+      p
+        strong = 'Nome: '
+        = @institution.name
+    .col-md-6
+      p
+        strong = 'Email: '
+        = @institution.email
+  .row
+    .col-md-6
+      p
+        strong = 'Telefone: '
+        = @institution.phone
+  .row
+    .col-md-6
+      p
+        strong = 'Descrição: '
+        = @institution.description
+  .row
+    .col-md-6
+      p
+        strong = 'Criado em: '
+        = @institution.created_at.strftime("%d/%m/%Y às %H:%M")
+    .col-md-6
+      p
+        strong = 'Atualizado em: '
+        = @institution.updated_at.strftime("%d/%m/%Y às %H:%M")
+
+  .row
+    .mt-3.d-flex.justify-content-end
+      = link_to "Voltar", institutions_path, class: "btn btn-secondary"

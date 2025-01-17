@@ -8,17 +8,17 @@
   table.table.table-bordered.table-hover
     thead
       tr
-        th Nome
-        th Email
-        th Equipe
-        th Ações
+        th.text-center Nome
+        th.text-center Email
+        th.text-center Equipe
+        th.text-center Ações
     tbody
       - @volunteers.each do |volunteer|
         tr
           td = volunteer.full_name
           td = volunteer.email
-          td = volunteer.current_team&.name.presence || 'Inativo'
-          td
+          td.text-center = volunteer.current_team&.name.presence || 'Inativo'
+          td.text-center
             = link_to volunteer_path(volunteer), class: "d-inline me-2" do
               i.bi.bi-eye-fill
             = link_to edit_volunteer_path(volunteer), class: "d-inline me-2" do
