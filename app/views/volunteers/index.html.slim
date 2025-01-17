@@ -1,4 +1,4 @@
-.container
+.container.mb-4
   h1.my-4.text-center = 'Voluntários'
 
   .row
@@ -25,4 +25,6 @@
               i.bi.bi-pencil-fill
             = link_to volunteer_path(volunteer), data: { turbo_method: :delete }, class: "d-inline" do
               i.bi.bi-trash-fill
+  .row.mt-4
+    .col-md-12.d-flex.justify-content-end
       = paginate @volunteers
