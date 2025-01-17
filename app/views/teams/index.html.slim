@@ -1,0 +1,32 @@
+.container.mb-4
+  h1.my-4.text-center = 'Equipes'
+
+  .row
+    .col-md-12.d-flex.justify-content-end
+      = link_to 'Nova Equipe', new_team_path, class: "btn btn-primary mb-4"
+
+  table.table.table-bordered.table-hover
+    thead
+      tr
+        th.text-center Nome
+        th.text-center Status
+        th.text-center Instituição
+        th.text-center # Voluntários
+        th.text-center Ações
+    tbody
+      - @teams.each do |team|
+        tr
+          td = team.name
+          td.text-center = team.status == 'active' ? 'Ativa' : 'Inativa'
+          td.text-center = team.institution.name
+          td.text-center = team.volunteers_count
+          td.text-center
+            = link_to team_path(team), class: "d-inline me-2" do
+              i.bi.bi-eye-fill
+            = link_to edit_team_path(team), class: "d-inline me-2" do
+              i.bi.bi-pencil-fill
+            = link_to team_path(team), data: { turbo_method: :delete }, class: "d-inline" do
+              i.bi.bi-trash-fill
+  .row.mt-4
+    .col-md-12.d-flex.justify-content-end
+      = paginate @teams
