@@ -9,7 +9,7 @@
     .col-md-6
       p
         strong = 'Data de nascimento: '
-        = @volunteer.birth_date.strftime("%d/%m/%Y")
+        = @volunteer.birth_date&.strftime("%d/%m/%Y")
   .row
     .col-md-6
       p

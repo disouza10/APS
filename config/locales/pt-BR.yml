@@ -1,12 +1,20 @@
 pt-BR:
-  views:
-    kaminari:
-      pagination:
-        first: "&laquo; Primeira"
-        last: "Última &raquo;"
-        previous: "&lsaquo; Ant"
-        next: "Próx &rsaquo;"
-        truncate: "&hellip;"
+  kaminari:
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Ant"
+      next: "Próx &rsaquo;"
+      truncate: "&hellip;"
+  volunteers:
+    index:
+      confirm_delete: "Tem certeza de que deseja excluir este voluntário?"
+  teams:
+    index:
+      confirm_delete: "Tem certeza de que deseja excluir esta equipe?"
+  institutions:
+    index:
+      confirm_delete: "Tem certeza de que deseja excluir esta instituição?"
   helpers:
     page_entries_info:
       one_page:

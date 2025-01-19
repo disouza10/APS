@@ -1,12 +1,20 @@
 en:
-  views:
-    kaminari:
-      pagination:
-        first: "&laquo; First"
-        last: "Last &raquo;"
-        previous: "&lsaquo; Prev"
-        next: "Next &rsaquo;"
-        truncate: "&hellip;"
+  kaminari:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "&hellip;"
+  volunteers:
+    index:
+      confirm_delete: "Are you sure you want to delete this volunteer?"
+  teams:
+    index:
+      confirm_delete: "Are you sure you want to delete this team?"
+  institutions:
+    index:
+      confirm_delete: "Are you sure you want to delete this institution?"
   helpers:
     page_entries_info:
       one_page:

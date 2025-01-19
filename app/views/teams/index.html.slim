@@ -25,7 +25,7 @@
               i.bi.bi-eye-fill
             = link_to edit_team_path(team), class: "d-inline me-2" do
               i.bi.bi-pencil-fill
-            = link_to team_path(team), data: { turbo_method: :delete }, class: "d-inline" do
+            = link_to team_path(team), data: { turbo_method: :delete, turbo_confirm: t('.confirm_delete') }, class: "d-inline" do
               i.bi.bi-trash-fill
   .row.mt-4
     .col-md-12.d-flex.justify-content-end
