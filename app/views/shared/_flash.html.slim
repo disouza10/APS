@@ -1,0 +1,22 @@
+- flash.each do |type, message|
+  - case type
+  - when 'notice'
+    .alert.alert-success.alert-dismissible.fade.show role="alert" data-turbo-temporary='true'
+      div = message
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+        span aria-hidden="true"
+  - when 'alert'
+    .alert.alert-warning.alert-dismissible.fade.show role="alert" data-turbo-temporary='true'
+      div = message
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+        span aria-hidden="true"
+  - when 'error'
+    .alert.alert-danger.alert-dismissible.fade.show role="alert" data-turbo-temporary='true'
+      div = message
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+        span aria-hidden="true"
+  - else
+    .alert.alert-info.alert-dismissible.fade.show role="alert" data-turbo-temporary='true'
+      div = message
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+        span aria-hidden="true"

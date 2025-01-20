@@ -1,4 +1,9 @@
 en:
+  activerecord:
+    models:
+      volunteer: Volunteer
+      team: Team
+      institution: Institution
   kaminari:
     pagination:
       first: "&laquo; First"

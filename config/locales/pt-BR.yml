@@ -1,4 +1,9 @@
 pt-BR:
+  activerecord:
+    models:
+      volunteer: Voluntário
+      team: Equipe
+      institution: Instituição
   kaminari:
     pagination:
       first: "&laquo; Primeira"

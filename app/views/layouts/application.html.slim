@@ -17,8 +17,8 @@ html
     = javascript_importmap_tags
 
   body
-    p.notice.d-none = notice
-    p.alert.d-none = alert
+    turbo-frame#flash
+      = render "shared/flash" if flash.present?
 
     = render partial: 'shared/navbar'
 

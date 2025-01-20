@@ -34,8 +34,11 @@ class VolunteersController < ApplicationController
   end
 
   def destroy
-    @volunteer.destroy
-    redirect_to volunteers_path
+    if @volunteer.destroy
+      redirect_to volunteers_path, notice: flash_removed(@volunteer)
+    else
+      redirect_to volunteers_path, error: flash_error
+    end
   end
 
   private
