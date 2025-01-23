@@ -13,13 +13,26 @@ pt-BR:
       truncate: "&hellip;"
   volunteers:
     index:
-      confirm_delete: "Tem certeza de que deseja excluir este voluntário?"
+      confirm_delete: Tem certeza de que deseja excluir este voluntário?
   teams:
     index:
-      confirm_delete: "Tem certeza de que deseja excluir esta equipe?"
+      confirm_delete: Tem certeza de que deseja excluir esta equipe?
   institutions:
     index:
-      confirm_delete: "Tem certeza de que deseja excluir esta instituição?"
+      confirm_delete: Tem certeza de que deseja excluir esta instituição?
+  devise:
+    registrations:
+      edit:
+        back: Voltar
+        confirm: Confirmar
+        leave_blank: deixe em branco se não deseja alterá-la
+        current_password: Senha Atual
+        confirm_current_password: precisamos da sua senha atual para confirmar suas alterações
+        edit_user: Editar Usuário
+        email: Email
+        password: Senha
+        password_confirmation: Confirmar Senha
+        min_characters: caracteres no mínimo
   helpers:
     page_entries_info:
       one_page:

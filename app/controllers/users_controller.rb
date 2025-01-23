@@ -25,10 +25,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
+        format.html { redirect_to @user, notice: flash_created(@user) }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, error: flash_error }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -38,10 +38,10 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: "User was successfully updated." }
+        format.html { redirect_to @user, notice: flash_updated(@user) }
         format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity, error: flash_error }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     @user.destroy!
 
     respond_to do |format|
-      format.html { redirect_to users_path, status: :see_other, notice: "User was successfully destroyed." }
+      format.html { redirect_to users_path, status: :see_other, notice: flash_removed(@user) }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :birth_date, :notes, :secondary_email, :phone, :occupation, :emergency_contact)
+      params.require(:user).permit(:email, :password, :password_confirmation)
     end
 end
