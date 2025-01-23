@@ -16,9 +16,9 @@ class InstitutionsController < ApplicationController
     @institution = Institution.new(institution_params)
 
     if @institution.save
-      redirect_to @institution
+      redirect_to @institution, notice: flash_created(@institution)
     else
-      render :new
+      render :new, error: flash_error
     end
   end
 
@@ -27,15 +27,18 @@ class InstitutionsController < ApplicationController
 
   def update
     if @institution.update(institution_params)
-      redirect_to @institution
+      redirect_to @institution, notice: flash_updated(@institution)
     else
-      render :edit
+      render :edit, error: flash_error
     end
   end
 
   def destroy
-    @institution.destroy
-    redirect_to institutions_path
+    if @institution.destroy
+      redirect_to institutions_path, notice: flash_removed(@institution)
+    else
+      redirect_to institutions_path, error: flash_error
+    end
   end
 
   private

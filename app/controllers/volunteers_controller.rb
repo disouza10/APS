@@ -16,9 +16,9 @@ class VolunteersController < ApplicationController
     @volunteer = Volunteer.new(volunteer_params)
 
     if @volunteer.save
-      redirect_to @volunteer
+      redirect_to @volunteer, notice: flash_created(@volunteer)
     else
-      render :new
+      render :new, error: flash_error
     end
   end
 
@@ -27,9 +27,9 @@ class VolunteersController < ApplicationController
 
   def update
     if @volunteer.update(volunteer_params)
-      redirect_to @volunteer
+      redirect_to @volunteer, notice: flash_updated(@volunteer)
     else
-      render :edit
+      render :edit, error: flash_error
     end
   end
 

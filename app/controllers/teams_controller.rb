@@ -16,9 +16,9 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
 
     if @team.save
-      redirect_to @team
+      redirect_to @team, notice: flash_created(@team)
     else
-      render :new
+      render :new, error: flash_error
     end
   end
 
@@ -27,15 +27,18 @@ class TeamsController < ApplicationController
 
   def update
     if @team.update(team_params)
-      redirect_to @team
+      redirect_to @team, notice: flash_updated(@team)
     else
-      render :edit
+      render :edit, error: flash_error
     end
   end
 
   def destroy
-    @team.destroy
-    redirect_to teams_path
+    if @team.destroy
+      redirect_to teams_path, notice: flash_removed(@team)
+    else
+      redirect_to teams_path, error: flash_error
+    end
   end
 
   private
