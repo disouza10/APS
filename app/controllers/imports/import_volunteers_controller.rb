@@ -10,7 +10,7 @@ class Imports::ImportVolunteersController < ApplicationController
     if uploaded_file.present?
       CSV.foreach(uploaded_file.path, headers: true, col_sep: ",") do |row|
         begin
-          created_at = DateTime.strptime(row["Carimbo de data/hora"], "%d/%m/%Y %H:%M")
+          created_at = DateTime.strptime(row.first[1], "%d/%m/%Y %H:%M")
           email = row[1]
           full_name = row["Nome completo"]
           phone = row["Telefone de contato"]
@@ -23,9 +23,11 @@ class Imports::ImportVolunteersController < ApplicationController
           coordination_notes = row["Observações da coordenação"]
           original_team = Team.find_by("LOWER(name) = ?", row["Equipe Original"]&.downcase)
 
-          volunteer = Volunteer.new(
+          volunteer = Volunteer.find_by(email: email)
+          volunteer = Volunteer.where("REGEXP_REPLACE(phone, '[^0-9]', '') = ?", phone.gsub(/\D/, "")).first_or_initialize
+
+          volunteer.update!(
             full_name: full_name,
-            email: email,
             birth_date: birth_date,
             phone: phone,
             address: address,
@@ -37,14 +39,14 @@ class Imports::ImportVolunteersController < ApplicationController
             original_team: original_team,
             created_at: created_at
           )
-          volunteer.save!
         rescue => e
-          redirect_to new_volunteer_path, alert: "Erro ao processar o arquivo: #{e.message}"
+          redirect_to import_volunteers_path, alert: "Erro ao processar o arquivo: #{e.message}"
+          return
         end
       end
-      redirect_to new_volunteer_path, notice: "Arquivo CSV processado com sucesso!"
+      redirect_to volunteers_path, notice: "Arquivo CSV processado com sucesso!"
     else
-      redirect_to new_volunteer_path, alert: "Nenhum arquivo foi selecionado."
+      redirect_to import_volunteers_path, alert: "Nenhum arquivo foi selecionado."
     end
   end
 end
