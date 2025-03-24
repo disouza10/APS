@@ -1,0 +1,28 @@
+.container.mb-4
+  h1.my-4.text-center = @formation.name
+
+  table.table.table-bordered.table-hover
+    thead
+      tr
+        th.text-center Nome
+        th.text-center Email
+        th.text-center Telefone
+        th.text-center # Voluntários
+        th.text-center Ações
+    tbody
+      - @institutions.each do |institution|
+        tr
+          td = institution.name
+          td.text-center = institution.email
+          td.text-center = institution.phone
+          td.text-center = institution.volunteers_count
+          td.text-center
+            = link_to institution_path(institution), class: "d-inline me-2" do
+              i.bi.bi-eye-fill
+            = link_to edit_institution_path(institution), class: "d-inline me-2" do
+              i.bi.bi-pencil-fill
+            = link_to institution_path(institution), data: { turbo_method: :delete, turbo_confirm: t('.confirm_delete') }, class: "d-inline" do
+              i.bi.bi-trash-fill
+  .row.mt-4
+    .col-md-12.d-flex.justify-content-end
+      = paginate @institutions, window: 2

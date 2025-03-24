@@ -15,6 +15,7 @@ class Imports::ImportFormationsController < ApplicationController
           volunteer_name = row["Nome"]
           team = Team.find_by("LOWER(name) = ?", row["Equipe"].downcase)
           feedback = row["Espaço para feedback opcional sobre a formação:"]
+          # TODO: adicionar ano da formação
 
           formation = Formation.new(name: params[:name], answered_at: answered_at, volunteer_email: email, volunteer_name: volunteer_name, team: team, feedback: feedback)
           formation.save!
