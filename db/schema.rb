@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_30_220405) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_30_231701) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -104,6 +104,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_30_220405) do
     t.string "email"
     t.uuid "current_team_id"
     t.uuid "original_team_id"
+    t.string "status", default: "active"
     t.index ["current_team_id"], name: "index_volunteers_on_current_team_id"
     t.index ["id", "deleted_at"], name: "index_volunteers_on_id_and_deleted_at", unique: true
     t.index ["original_team_id"], name: "index_volunteers_on_original_team_id"

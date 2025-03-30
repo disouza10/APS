@@ -4,5 +4,5 @@
   = form_with url: show_by_year_formations_path, method: :get do |f|
     .row
       .col-md-3
-        = label_tag 'year-select', 'Escolha o ano da formação:', class: 'form-label'
-        = select_tag 'year-select', options_for_select(%w(2024 2025)), class: 'form-select'
+        = label_tag 'year', 'Escolha o ano da formação:', class: 'form-label'
+        = select_tag 'year', options_for_select([['', ''], '2024', '2025']), class: 'form-select', onchange: 'this.form.submit()'
