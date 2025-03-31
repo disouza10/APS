@@ -18,6 +18,7 @@ class Imports::ImportVolunteersController < ApplicationController
           occupation = row["Profissão"]
           emergency_contact_name = row["Contato de emergência (telefone + nome + identificação)"]
           current_team = Team.find_by("LOWER(name) = ?", row["Equipe"].downcase)
+          status = current_team.nil? ? "inactive" : "active"
           notes = row["Informações relevantes: Nesse campo, você pode detalhar alguma intolerância, alergia ou questão específica de saúde/alimentação. Se for o caso, sinta-se a vontade para compartilhar conosco. Obs: essa informação poderá ser compartilhada com o líder da sua equipe."]
           birth_date = row["Data de nascimento"].nil? ? nil : Date.parse(row["Data de nascimento"])
           coordination_notes = row["Observações da coordenação"]
@@ -27,6 +28,7 @@ class Imports::ImportVolunteersController < ApplicationController
           volunteer = Volunteer.where("REGEXP_REPLACE(phone, '[^0-9]', '') = ?", phone.gsub(/\D/, "")).first_or_initialize
 
           volunteer.update!(
+            email: email,
             full_name: full_name,
             birth_date: birth_date,
             phone: phone,
@@ -37,6 +39,7 @@ class Imports::ImportVolunteersController < ApplicationController
             notes: notes,
             coordination_notes: coordination_notes,
             original_team: original_team,
+            status: status,
             created_at: created_at
           )
         rescue => e

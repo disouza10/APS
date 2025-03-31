@@ -5,4 +5,8 @@ class Volunteer < ApplicationRecord
   belongs_to :original_team, class_name: "Team", optional: true
 
   enum status: { active: "active", inactive: "inactive" }, _default: "active"
+
+  def team
+    current_team
+  end
 end

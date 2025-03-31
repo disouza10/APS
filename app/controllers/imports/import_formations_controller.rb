@@ -26,8 +26,6 @@ class Imports::ImportFormationsController < ApplicationController
         team = Team.find_by("LOWER(name) = ?", row["Equipe"].downcase)
         feedback = row["Espaço para feedback opcional sobre a formação:"]
 
-        return if Formation.find_by("LOWER(name) = ? AND year = ?", name.downcase, year).present?
-
         formation = Formation.new(name: name, answered_at: answered_at, year: year, volunteer_email: email, volunteer_name: volunteer_name, team: team, feedback: feedback)
         formation.save!
       end

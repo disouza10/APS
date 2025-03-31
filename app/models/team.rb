@@ -7,7 +7,7 @@ class Team < ApplicationRecord
   has_many :original_volunteers, class_name: "Volunteer", foreign_key: "original_team_id"
   has_many :children, class_name: "Child"
 
-  enum status: { active: "active", inactive: "inactive" }, _default: "active", _suffix: true
+  enum status: { active: "active", inactive: "inactive" }, _default: "active"
 
   def volunteers_count
     self.volunteers.count
