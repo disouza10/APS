@@ -6,6 +6,12 @@ class Volunteer < ApplicationRecord
 
   enum status: { active: "active", inactive: "inactive" }, _default: "active"
 
+  scope :search, ->(query) {
+    return current_scope if query.blank?
+
+    where("full_name ILIKE ?", "%#{sanitize_sql_like(query)}%")
+  }
+
   def team
     current_team
   end

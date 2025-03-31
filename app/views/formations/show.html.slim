@@ -3,4 +3,6 @@
 
   .d-flex.flex-column
     span = "Voluntários Presentes: #{@formations.count}"
+    / TODO: voluntários ausentes devem ser considerados no momento da formação
+    / talvez criar um método para pegar apenas os voluntários que estavam ativos na data da formação
     span = "Voluntários Ausentes: #{Volunteer.active.count - @formations.count}"

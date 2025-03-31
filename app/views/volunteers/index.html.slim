@@ -1,11 +1,17 @@
 .container.mb-4
   h1.my-4.text-center = 'Voluntários'
 
+  / TODO: decidir se vou querer mostrar isso ou não
+  / .row
+    span = "Ativos: #{Volunteer.active.count}"
+    span = "Total: #{Volunteer.count}"
+
   .row
-    .col-md-2.d-flex.flex-column
-      span = "Ativos: #{Volunteer.active.count}"
-      span = "Total: #{Volunteer.count}"
-    .col-md-10.d-flex.justify-content-end
+    .col-md-4.search
+      = form_with url: volunteers_path, method: :get, local: true, id: 'volunteer-search', class: "d-flex" do |f|
+        = f.text_field :query, class: "form-control me-2", placeholder: "Buscar voluntário..."
+        = f.submit "Buscar", class: "btn btn-outline-primary"
+    .col-md-8.d-flex.justify-content-end
       = link_to 'Novo Voluntário', new_volunteer_path, class: "btn btn-primary mb-4"
 
   table.table.table-bordered.table-hover
