@@ -8,11 +8,11 @@
 
   .row
     .col-md-4.search
-      = form_with url: volunteers_path, method: :get, local: true, id: 'volunteer-search', class: "d-flex" do |f|
-        = f.text_field :query, class: "form-control me-2", placeholder: "Buscar voluntário..."
-        = f.submit "Buscar", class: "btn btn-outline-primary"
+      = form_with url: volunteers_path, method: :get, local: true, id: 'volunteer-search', class: 'd-flex' do |f|
+        = f.text_field :query, class: 'form-control me-2', placeholder: 'Buscar voluntário...'
+        = f.submit 'Buscar', class: 'btn btn-outline-primary'
     .col-md-8.d-flex.justify-content-end
-      = link_to 'Novo Voluntário', new_volunteer_path, class: "btn btn-primary mb-4"
+      = link_to 'Novo Voluntário', new_volunteer_path, class: 'btn btn-primary mb-4'
 
   table.table.table-bordered.table-hover
     thead
@@ -28,11 +28,11 @@
           td = volunteer.email
           td.text-center = volunteer.current_team&.name.presence || 'Inativo'
           td.text-center
-            = link_to volunteer_path(volunteer), class: "d-inline me-2" do
+            = link_to volunteer_path(volunteer), class: 'd-inline me-2' do
               i.bi.bi-eye-fill
-            = link_to edit_volunteer_path(volunteer), class: "d-inline me-2" do
+            = link_to edit_volunteer_path(volunteer), class: 'd-inline me-2' do
               i.bi.bi-pencil-fill
-            = link_to volunteer_path(volunteer), data: { turbo_method: :delete, turbo_confirm: t('.confirm_delete') }, class: "d-inline" do
+            = link_to volunteer_path(volunteer), data: { turbo_method: :delete, turbo_confirm: t('.confirm_delete') }, class: 'd-inline' do
               i.bi.bi-trash-fill
   .row.mt-4
     .col-md-12.d-flex.justify-content-end

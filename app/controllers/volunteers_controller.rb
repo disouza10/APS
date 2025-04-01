@@ -47,7 +47,7 @@ class VolunteersController < ApplicationController
   private
 
   def set_volunteer
-    @volunteer = Volunteer.find(params["id"])
+    @volunteer = Volunteer.find(params['id'])
   end
 
   def volunteer_params
