@@ -1,5 +1,5 @@
 class Child < ApplicationRecord
-  self.table_name = "children"
+  self.table_name = 'children'
 
   acts_as_paranoid
 

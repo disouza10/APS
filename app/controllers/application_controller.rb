@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def flash_error
-    flash[:error] = "Houve um erro ao processar a requisição."
+    flash[:error] = 'Houve um erro ao processar a requisição.'
   end
 end

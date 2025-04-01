@@ -10,3 +10,6 @@ Style/StringLiterals:
 
 Style/StringConcatenation:
   EnforcedStyle: double_quotes
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
