@@ -11,8 +11,8 @@ class Imports::ImportFormationsController < ApplicationController
       return
     end
 
-    name = params[:name]
-    if name.blank?
+    @name = params[:name]
+    if @name.blank?
       redirect_to new_import_formation_path, alert: 'A formação deve ter um nome.'
       return
     end
@@ -26,12 +26,27 @@ class Imports::ImportFormationsController < ApplicationController
         team = Team.find_by('LOWER(name) = ?', row['Equipe'].downcase)
         feedback = row['Espaço para feedback opcional sobre a formação:']
 
-        formation = Formation.new(name: name, answered_at: answered_at, year: year, volunteer_email: email, volunteer_name: volunteer_name, team: team, feedback: feedback)
+        formation = Formation.new(name: @name, answered_at: answered_at, year: year, volunteer_email: email, volunteer_name: volunteer_name, team: team, feedback: feedback)
         formation.save!
       end
+
+      create_report
+
       redirect_to formations_path, notice: 'Arquivo CSV processado com sucesso!'
     rescue => e
       redirect_to imports_path, alert: "Erro ao processar o arquivo: #{e.message}"
     end
+  end
+
+  private
+
+  def create_report
+    attendees = Formation.where(name: @name)
+    FormationReport.create(
+      name: @name,
+      year: Formation.where(name: @name).last.year,
+      attendees: attendees,
+      missing: Volunteer.active - attendees
+    )
   end
 end

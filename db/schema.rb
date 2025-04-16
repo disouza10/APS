@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_30_231701) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_16_021225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_30_231701) do
     t.index ["id", "deleted_at"], name: "index_children_on_id_and_deleted_at", unique: true
     t.index ["institution_id"], name: "index_children_on_institution_id"
     t.index ["team_id"], name: "index_children_on_team_id"
+  end
+
+  create_table "formation_reports", force: :cascade do |t|
+    t.string "name"
+    t.integer "year"
+    t.jsonb "attendees", default: []
+    t.jsonb "missing", default: []
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id", "deleted_at"], name: "index_formation_reports_on_id_and_deleted_at", unique: true
   end
 
   create_table "formations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -20,7 +20,7 @@
       p
         strong = 'Voluntários: '
         ul
-          - @team.volunteers.each do |volunteer|
+          - @team.volunteers.order(:full_name).each do |volunteer|
             li = volunteer.full_name
   .row
     .col-md-6
