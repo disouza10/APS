@@ -6,7 +6,8 @@ class FormationsController < ApplicationController
   end
 
   def show_by_year
-    @formation = FormationReport.where(year: params[:year]).first
+    @report = Formation.report_by_year(params[:year])
+    @year = params[:year]
 
     render :show
   end

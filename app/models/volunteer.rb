@@ -6,6 +6,9 @@ class Volunteer < ApplicationRecord
 
   enum status: { active: 'active', inactive: 'inactive' }, _default: 'active'
 
+  scope :active, -> { where(status: 'active') }
+  scope :inactive, -> { where(status: 'inactive') }
+
   scope :search, ->(query) {
     return current_scope if query.blank?
 

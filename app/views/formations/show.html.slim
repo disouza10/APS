@@ -1,10 +1,25 @@
 .container.mb-4
-  - if !@formation.present?
-    h1.my-4.text-center = "Não há formações para este ano"
-  - else
-    h1.my-4.text-center = @formation.name
+  .row.text-center.mt-4.mb-4
+    .col-md-12
+      h1 = "Detalhes das formações do ano de #{@year}"
 
-    .d-flex.flex-column
-      span = "Voluntários Presentes: #{@formation.attendees.count}"
-      span = "Voluntários Ausentes: #{@formation.missing.count}"
-      / TODO: adicionar dados dos voluntários em forma de tabela
+  .d-flex.flex-column
+    - grouped = @report.group_by(&:team_name)
+    - grouped.each do |team_name, volunteers|
+      .row
+        .card.mb-3
+          .card-header
+            h5 = team_name
+          .card-body
+            table.table.table-bordered
+              thead
+                tr
+                  th Nome
+                  th Email
+                  th.text-center Presenças
+              tbody
+                - volunteers.each do |r|
+                  tr
+                    td = r.volunteer_name
+                    td = r.volunteer_email
+                    td.text-center = r.presence_count
