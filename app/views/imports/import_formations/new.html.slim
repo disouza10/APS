@@ -5,12 +5,12 @@
       = form_with url: import_formations_path, method: :post, local: true, html: { multipart: true } do |f|
         .form-group.mb-3
           = f.label 'Nome da Formação', class: 'form-label'
-          = f.text_field :name, class: 'form-control'
+          = f.text_field :name, class: 'form-control', id: 'formation_name'
         .form-group.mb-3
           = f.label 'Data da Formação', class: 'form-label'
           = f.date_field :date, class: 'form-control'
         .form-group.mb-3
           = f.label :file, "Selecione um arquivo CSV", class: "form-label"
-          = f.file_field :file, class: "form-control"
+          = f.file_field :file, class: "form-control", onchange: "if (this.files[0]) { document.getElementById('formation_name').value = this.files[0].name.replace(/\\.[^/.]+$/, '') }"
         .d-grid
           = f.submit "Upload", class: "btn btn-primary"
