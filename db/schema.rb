@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_16_021225) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_17_190936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,11 +29,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_16_021225) do
     t.index ["team_id"], name: "index_children_on_team_id"
   end
 
-  create_table "formation_reports", force: :cascade do |t|
+  create_table "formation_reports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.integer "year"
-    t.jsonb "attendees", default: []
-    t.jsonb "missing", default: []
+    t.date "date"
+    t.integer "active_volunteers_count"
+    t.integer "inactive_volunteers_count"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,17 +42,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_16_021225) do
 
   create_table "formations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "answered_at"
-    t.string "name"
-    t.string "volunteer_name"
-    t.string "volunteer_email"
     t.string "feedback"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.uuid "team_id"
-    t.integer "year"
+    t.uuid "volunteer_id"
+    t.uuid "formation_report_id"
+    t.index ["formation_report_id"], name: "index_formations_on_formation_report_id"
     t.index ["id", "deleted_at"], name: "index_formations_on_id_and_deleted_at", unique: true
     t.index ["team_id"], name: "index_formations_on_team_id"
+    t.index ["volunteer_id"], name: "index_formations_on_volunteer_id"
   end
 
   create_table "institutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -123,7 +123,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_16_021225) do
 
   add_foreign_key "children", "institutions"
   add_foreign_key "children", "teams"
+  add_foreign_key "formations", "formation_reports"
   add_foreign_key "formations", "teams"
+  add_foreign_key "formations", "volunteers"
   add_foreign_key "teams", "institutions"
   add_foreign_key "volunteers", "teams", column: "current_team_id"
   add_foreign_key "volunteers", "teams", column: "original_team_id"

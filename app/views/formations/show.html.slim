@@ -18,8 +18,8 @@
                   th Email
                   th.text-center Presenças
               tbody
-                - volunteers.each do |r|
+                - volunteers.each do |volunteer|
                   tr
-                    td = r.volunteer_name
-                    td = r.volunteer_email
-                    td.text-center = r.presence_count
+                    td = volunteer.full_name
+                    td = volunteer.email
+                    td.text-center = volunteer.presence_count
