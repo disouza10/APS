@@ -1,5 +1,6 @@
 class FormationReport < ApplicationRecord
   acts_as_paranoid
+  audited
 
   has_many :formations, dependent: :destroy
 

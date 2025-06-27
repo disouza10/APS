@@ -1,5 +1,6 @@
 class Institution < ApplicationRecord
   acts_as_paranoid
+  audited
 
   has_many :children
   # has_many :volunteers
