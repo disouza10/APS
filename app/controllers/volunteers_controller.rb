@@ -64,7 +64,8 @@ class VolunteersController < ApplicationController
       :notes,
       :coordination_notes,
       :current_team_id,
-      :original_team_id
+      :original_team_id,
+      :status
     )
   end
 end

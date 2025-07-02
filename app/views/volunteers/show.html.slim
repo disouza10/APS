@@ -11,6 +11,11 @@
         strong = 'Data de nascimento: '
         = @volunteer.birth_date&.strftime("%d/%m/%Y")
   .row
+    .col-md-12
+      p
+        strong = 'Status: '
+        = @volunteer.status
+  .row
     .col-md-6
       p
         strong = 'Email: '

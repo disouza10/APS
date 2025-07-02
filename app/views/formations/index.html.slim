@@ -26,8 +26,10 @@
               | Exibe um relatório agrupando as últimas formações cadastradas.
 
   .row.text-center.mt-4.mb-3
-    .col-md-12
+    .col-md-10
       h1.fs-4 = @title
+    .col-md-2 class="#{'d-none' unless @report.present?}"
+      = link_to 'Voluntários Críticos', critical_volunteers_formations_path(year: params[:year], last_formations: params[:last_formations]), remote: true, class: 'btn btn-primary'
 
   - if @report.present?
     .d-flex.flex-column.align-items-center
@@ -44,6 +46,7 @@
                   th Email
                   th.text-center Presenças
                   th.text-center(style="white-space: nowrap;") Total de Formações
+                  th.text-center Status
               tbody
                 - volunteers.each do |volunteer|
                   tr
@@ -51,6 +54,7 @@
                     td = volunteer.email
                     td.text-center = volunteer.presence_count
                     td.text-center = volunteer.total_formations
+                    td.text-center = volunteer.volunteer_status
   - else
     .alert.alert-info.mt-4.text-center
       | Nenhum relatório encontrado. Selecione um filtro para visualizar as formações.

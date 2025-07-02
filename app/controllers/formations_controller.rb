@@ -1,16 +1,32 @@
 class FormationsController < ApplicationController
-  def index
-    @year = params[:year]
-    @last_formations = params[:last_formations]
+  before_action :set_params
+  before_action :set_report
 
+  def index
+  end
+
+  def critical_volunteers
+    @grouped_report = @report.map do |report|
+      next if report.volunteer_status != 'critical'
+      { team_name: report.team_name, full_name: report.full_name, email: report.email }
+    end.compact.group_by { |report| report[:team_name] }
+    @title = 'Voluntários Críticos (não participaram de nenhuma formação)'
+  end
+
+  private
+
+  def set_params
+    @year = params[:year]
+    @last_formations = params[:last_formations].to_i if params[:last_formations].present?
+  end
+
+  def set_report
     return report_by_year if @year.present?
     return report_by_last_formations if @last_formations.present?
 
     @report = []
     @title = 'Selecione um filtro para visualizar as formações'
   end
-
-  private
 
   def report_by_year
     @report = FormationReport.report_by_year(@year)

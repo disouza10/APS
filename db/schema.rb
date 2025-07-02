@@ -14,10 +14,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_27_153248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "audits", force: :cascade do |t|
-    t.integer "auditable_id"
+  create_table "audits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "auditable_id"
     t.string "auditable_type"
-    t.integer "associated_id"
+    t.uuid "associated_id"
     t.string "associated_type"
     t.uuid "user_id"
     t.string "user_type"

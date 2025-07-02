@@ -2,10 +2,10 @@
 
 class InstallAudited < ActiveRecord::Migration[7.2]
   def self.up
-    create_table :audits, force: true do |t|
-      t.column :auditable_id, :integer
+    create_table :audits, id: :uuid, default: -> { "gen_random_uuid()" }, force: true do |t|
+      t.column :auditable_id, :uuid
       t.column :auditable_type, :string
-      t.column :associated_id, :integer
+      t.column :associated_id, :uuid
       t.column :associated_type, :string
       t.column :user_id, :uuid
       t.column :user_type, :string

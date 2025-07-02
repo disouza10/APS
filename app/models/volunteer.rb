@@ -16,7 +16,15 @@ class Volunteer < ApplicationRecord
     where('full_name ILIKE ?', "%#{sanitize_sql_like(query)}%")
   }
 
+  before_save :downcase_email
+
   def team
     current_team
+  end
+
+  private
+
+  def downcase_email
+    self.email = email.downcase
   end
 end

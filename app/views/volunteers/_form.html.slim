@@ -67,10 +67,15 @@ ruby:
       .row.mt-3
         .col-md-6
           = f.label :current_team_id, "Equipe Atual", class: 'form-label me-2'
-          = f.collection_select :current_team_id, Team.all, :id, :name, class: "form-control"
+          = f.collection_select :current_team_id, Team.all, :id, :name, { include_blank: "INATIVO" }, class: "form-control"
         .col-md-6
           = f.label :original_team_id, "Equipe Original", class: 'form-label me-2'
           = f.collection_select :original_team_id, Team.all, :id, :name, class: "form-control"
+
+      .row.mt-3
+        .col-md-6
+          = f.label :status, 'Status', class: 'form-label'
+          = f.select :status, Volunteer.statuses.keys.map { |s| [s.humanize, s] }, {}, class: "form-select"
 
       .mt-3.d-flex.justify-content-end
         = link_to "Voltar", volunteers_path, class: "btn btn-secondary me-2"
