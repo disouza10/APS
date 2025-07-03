@@ -13,7 +13,7 @@ class Volunteer < ApplicationRecord
   scope :search, ->(query) {
     return current_scope if query.blank?
 
-    where('full_name ILIKE ?', "%#{sanitize_sql_like(query)}%")
+    where('UNACCENT(full_name) ILIKE UNACCENT(?)', "%#{sanitize_sql_like(query)}%")
   }
 
   before_save :downcase_email

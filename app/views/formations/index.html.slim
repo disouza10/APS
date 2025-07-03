@@ -27,7 +27,8 @@
 
   - if @report.present?
     h3.text-center.pt-4 Relatório de Formações
-    .d-flex.justify-content-end.mb-3
+    .d-flex.justify-content-between.mb-3
+      span.align-self-center = "Total: #{@report.size}"
       = form_with url: formations_path, method: :get, local: true, class: 'd-inline' do |f|
         = hidden_field_tag :year, params[:year]
         = hidden_field_tag :last_formations, params[:last_formations]

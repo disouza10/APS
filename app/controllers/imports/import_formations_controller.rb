@@ -23,7 +23,7 @@ class Imports::ImportFormationsController < ApplicationController
     if formation_report.save!
       CSV.foreach(uploaded_file.path, headers: true, col_sep: ',') do |row|
         answered_at = DateTime.strptime(row['Carimbo de data/hora'], '%d/%m/%Y %H:%M')
-        email = row[1]
+        email = row[1].downcase
         volunteer = Volunteer.find_by(email: email)
         team = Team.find_by('LOWER(name) = ?', row['Equipe'].downcase)
         feedback = row['Espaço para feedback opcional sobre a formação:']
