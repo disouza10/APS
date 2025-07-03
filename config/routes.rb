@@ -8,9 +8,7 @@ Rails.application.routes.draw do
 
   resources :volunteers
   resources :institutions
-  resources :formations, only: %i[index] do
-    get :critical_volunteers, on: :collection
-  end
+  resources :formations, only: %i[index]
   resources :teams
 
   resources :imports, only: %i[index] do

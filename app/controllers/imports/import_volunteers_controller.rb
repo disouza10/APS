@@ -25,7 +25,7 @@ class Imports::ImportVolunteersController < ApplicationController
           original_team = Team.find_by('LOWER(name) = ?', row['Equipe Original']&.downcase)
 
           volunteer = Volunteer.find_by(email: email)
-          volunteer = Volunteer.where("REGEXP_REPLACE(phone, '[^0-9]', '') = ?", phone.gsub(/\D/, '')).first_or_initialize
+          volunteer = Volunteer.where("REGEXP_REPLACE(phone, '[^0-9]', '') = ?", phone.gsub(/\D/, '')).first_or_initialize if volunteer.nil?
 
           volunteer.update!(
             email: email,
