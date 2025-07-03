@@ -25,36 +25,32 @@
             .text-muted.small.mt-1.w-100.text-center
               | Exibe um relatório agrupando as últimas formações cadastradas.
 
-  .row.text-center.mt-4.mb-3
-    .col-md-10
-      h1.fs-4 = @title
-    .col-md-2 class="#{'d-none' unless @report.present?}"
-      = link_to 'Voluntários Críticos', critical_volunteers_formations_path(year: params[:year], last_formations: params[:last_formations]), remote: true, class: 'btn btn-primary'
-
   - if @report.present?
-    .d-flex.flex-column.align-items-center
-      - grouped = @report.group_by(&:team_name)
-      - grouped.each do |team_name, volunteers|
-        .card.mb-3.shadow-sm.w-100(style="max-width: 800px;")
-          .card-header.bg-light
-            h5.mb-0 = team_name
-          .card-body.p-2
-            table.table.table-md.table-bordered.mb-0
-              thead
-                tr
-                  th Nome
-                  th Email
-                  th.text-center Presenças
-                  th.text-center(style="white-space: nowrap;") Total de Formações
-                  th.text-center Status
-              tbody
-                - volunteers.each do |volunteer|
-                  tr
-                    td = volunteer.full_name
-                    td = volunteer.email
-                    td.text-center = volunteer.presence_count
-                    td.text-center = volunteer.total_formations
-                    td.text-center = volunteer.volunteer_status
+    h3.text-center.pt-4 Relatório de Formações
+    .d-flex.justify-content-end.mb-3
+      = form_with url: formations_path, method: :get, local: true, class: 'd-inline' do |f|
+        = hidden_field_tag :year, params[:year]
+        = hidden_field_tag :last_formations, params[:last_formations]
+        = select_tag :status, options_for_select([['Todos os status', ''], ['OK', 'ok'], ['Atenção', 'attention'], ['Crítico', 'critical']], selected: @status), class: 'form-select d-inline w-auto me-2 pe-5', onchange: 'this.form.submit()'
+    table.table.table-bordered.table-hover.bg-white.shadow-sm
+      thead
+        tr
+          th.text-center Equipe
+          th Nome
+          th Email
+          th.text-center Presenças
+          th.text-center(style="white-space: nowrap;") Total de Formações
+          th.text-center Status
+      tbody
+        - @report.each do |r|
+          tr
+            td.text-center(style="white-space: nowrap;") = r.team_name
+            td = r.full_name
+            td = r.email
+            td.text-center = r.presence_count
+            td.text-center = r.total_formations
+            td.text-center = translated_volunteer_status(r.volunteer_status)
   - else
-    .alert.alert-info.mt-4.text-center
+    h3.text-center.mb-4 Nenhum relatório encontrado
+    .alert.alert-info.text-center.mt-4
       | Nenhum relatório encontrado. Selecione um filtro para visualizar as formações.

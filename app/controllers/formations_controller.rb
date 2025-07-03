@@ -3,14 +3,7 @@ class FormationsController < ApplicationController
   before_action :set_report
 
   def index
-  end
-
-  def critical_volunteers
-    @grouped_report = @report.map do |report|
-      next if report.volunteer_status != 'critical'
-      { team_name: report.team_name, full_name: report.full_name, email: report.email }
-    end.compact.group_by { |report| report[:team_name] }
-    @title = 'Voluntários Críticos (não participaram de nenhuma formação)'
+    filter_status if params[:status].present?
   end
 
   private
@@ -36,5 +29,11 @@ class FormationsController < ApplicationController
   def report_by_last_formations
     @report = FormationReport.volunteer_presence_last_formations(@last_formations)
     @title = "Detalhes das últimas #{@last_formations} formações"
+  end
+
+  def filter_status
+    @report = @report.select { |r| r.volunteer_status == params[:status] }
+    @title = 'Voluntários Críticos (não participaram de nenhuma formação)'
+    @status = params[:status]
   end
 end
